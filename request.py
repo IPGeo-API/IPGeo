@@ -28,7 +28,7 @@ def flatten_json(nested_json):
     flatten(nested_json)
     return out
 
-url = 'https://ipgeo.azurewebsites.net/IPsearch/try'
+url = 'https://ipgeo.azurewebsites.net/try'
 
 with open('ipList.txt', 'r') as f:
     ipList = [line.strip() for line in f]
@@ -44,10 +44,10 @@ for ip in ipList:
     ipsearch = "{\n\t\"ip\":\""+ip+"\"\n}"
     res = requests.post(url, data=ipsearch)
     res = res.text
-    with open("results/result-ip-"+ip+".json", 'w') as result:
+    with open("results/json/result-ip-"+ip+".json", 'w') as result:
         result.write(res)
         result.close()
-        with open("results/result-ip-"+ip+".json", 'r') as result:
+        with open("results/json/result-ip-"+ip+".json", 'r') as result:
             data = json.load(result)
             data = flatten_json(data)
             ipAddress = [""+ip+""]
@@ -70,6 +70,6 @@ for ip in ipList:
                 df = df.rename(columns={'country_names_en':'Country','continent_names_en':'Continent',
                 'location_latitude':'Latitude','location_longitude':'Longitude'})
             #df = df.dropna()
-            df.to_csv(path_or_buf="results/result-ip-"+ip+".csv", sep =',', index = False)
+            df.to_csv(path_or_buf="results/csv/result-ip-"+ip+".csv", sep =',', index = False)
             result.close()
 
