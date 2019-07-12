@@ -54,22 +54,37 @@ for ip in ipList:
             df = pd.Series(data).to_frame().T
             df['ip'] = ipAddress
             if set(['city_names_en','subdivisions_0_names_en']).issubset(df.columns):
-                df = df[['ip','city_names_en','subdivisions_0_names_en','country_names_en','continent_names_en','location_latitude','location_longitude']]
+                df = df[['ip','city_names_en','subdivisions_0_names_en','country_names_en','continent_names_en','location_latitude','location_longitude',
+                'autonomous_system_number','autonomous_system_organization','isp','organization','organization_type','isic_code','naics_code','connection_type'
+                ,'ip_routing_type', 'line_speed']]
                 df = df.rename(columns={'city_names_en':'City','subdivisions_0_names_en':'State/Province','country_names_en':'Country','continent_names_en':'Continent',
-                'location_latitude':'Latitude','location_longitude':'Longitude'})
+                'location_latitude':'Latitude','location_longitude':'Longitude','autonomous_system_number':'ASN','autonomous_system_organization':'ASO',
+                'isp':'ISP', 'organization':'Organization','organization_type':'Organization Type','isic_code':'ISIC','naics_code':'NAICS'
+                ,'connection_type':'Connection Type','ip_routing_type':'IP Routing Type','line_speed':'Line Speed'})
             elif 'city_names_en' in df:
-                df = df[['ip','city_names_en','country_names_en','continent_names_en','location_latitude','location_longitude']]
+                df = df[['ip','city_names_en','country_names_en','continent_names_en','location_latitude','location_longitude',
+                'autonomous_system_number','autonomous_system_organization','isp','organization','organization_type','isic_code','naics_code','connection_type',
+                'ip_routing_type','line_speed']]
                 df = df.rename(columns={'city_names_en':'City','country_names_en':'Country','continent_names_en':'Continent',
-                'location_latitude':'Latitude','location_longitude':'Longitude'})
+                'location_latitude':'Latitude','location_longitude':'Longitude','autonomous_system_number':'ASN','autonomous_system_organization':'ASO',
+                'isp':'ISP', 'organization':'Organization','organization_type':'Organization Type','isic_code':'ISIC','naics_code':'NAICS'
+                ,'connection_type':'Connection Type','ip_routing_type':'IP Routing Type','line_speed':'Line Speed'})
             elif 'subdivisions_0_names_en' in df:
-                df = df[['ip','subdivisions_0_names_en','country_names_en','continent_names_en','location_latitude','location_longitude']]
+                df = df[['ip','subdivisions_0_names_en','country_names_en','continent_names_en','location_latitude','location_longitude',
+                'autonomous_system_number','autonomous_system_organization','isp','organization','organization_type','isic_code','naics_code','connection_type',
+                'ip_routing_type','line_speed']]
                 df = df.rename(columns={'subdivisions_0_names_en':'State/Province','country_names_en':'Country','continent_names_en':'Continent',
-                'location_latitude':'Latitude','location_longitude':'Longitude'})
+                'location_latitude':'Latitude','location_longitude':'Longitude','autonomous_system_number':'ASN','autonomous_system_organization':'ASO',
+                'isp':'ISP', 'organization':'Organization','organization_type':'Organization Type','isic_code':'ISIC','naics_code':'NAICS'
+                ,'connection_type':'Connection Type','ip_routing_type':'IP Routing Type','line_speed':'Line Speed'})
             else:
-                df = df[['ip','country_names_en','continent_names_en','location_latitude','location_longitude']]
+                df = df[['ip','country_names_en','continent_names_en','location_latitude','location_longitude',
+                'autonomous_system_number','autonomous_system_organization','isp','organization','organization_type','isic_code','naics_code','connection_type',
+                'ip_routing_type','line_speed']]
                 df = df.rename(columns={'country_names_en':'Country','continent_names_en':'Continent',
-                'location_latitude':'Latitude','location_longitude':'Longitude'})
-            #df = df.dropna()
+                'location_latitude':'Latitude','location_longitude':'Longitude','autonomous_system_number':'ASN','autonomous_system_organization':'ASO',
+                'isp':'ISP', 'organization':'Organization','organization_type':'Organization Type','isic_code':'ISIC','naics_code':'NAICS'
+                ,'connection_type':'Connection Type','ip_routing_type':'IP Routing Type','line_speed':'Line Speed'})
             df.to_csv(path_or_buf="results/csv/result-ip-"+ip+".csv", sep =',', index = False)
             result.close()
 
