@@ -28,21 +28,16 @@ def flatten_json(nested_json):
     flatten(nested_json)
     return out
 
-url = 'https://ipgeo.azurewebsites.net/try'
+url = 'http://127.0.0.1:5000/try'
 
 with open('ipList.txt', 'r') as f:
     ipList = [line.strip() for line in f]
     f.close() 
-"""
-ipList = []
-numberInput = int(input("How many IP searches would you like to make? "))
-for x in range(numberInput):
-    ip = input("Please Enter IPv4 request in x.x.x.x format. ")
-    ipList.append(ip)
-"""
+
 for ip in ipList:
     ipsearch = "{\n\t\"ip\":\""+ip+"\"\n}"
-    res = requests.post(url, data=ipsearch)
+    authentication = {'Content-Type': "application/json"}
+    res = requests.post(url, data=ipsearch, headers=authentication)
     res = res.text
     with open("results/json/result-ip-"+ip+".json", 'w') as result:
         result.write(res)
@@ -53,6 +48,7 @@ for ip in ipList:
             ipAddress = [""+ip+""]
             df = pd.Series(data).to_frame().T
             df['ip'] = ipAddress
+
             if set(['city_names_en','subdivisions_0_names_en']).issubset(df.columns):
                 df = df[['ip','city_names_en','subdivisions_0_names_en','country_names_en','continent_names_en','location_latitude','location_longitude',
                 'autonomous_system_number','autonomous_system_organization','isp','organization','organization_type','isic_code','naics_code','connection_type'

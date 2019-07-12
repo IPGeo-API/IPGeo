@@ -1,0 +1,2 @@
+ip,City,State/Province,Country,Continent,Latitude,Longitude,ASN,ASO,ISP,Organization,Organization Type,ISIC,NAICS,Connection Type,IP Routing Type,Line Speed
+8.8.8.8,Mountain View,California,United States,North America,37.386,-122.0838,15169,Google Inc.,Google,Google,,,,ocx,fixed,high
