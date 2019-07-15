@@ -2,6 +2,7 @@ import requests
 import json
 import ast
 import pandas as pd
+import time
 
 def flatten_json(nested_json):
     """
@@ -27,13 +28,21 @@ def flatten_json(nested_json):
 
     flatten(nested_json)
     return out
+#Sets Post URL
+url = 'https://ipgeo.azurewebsites.net/try'
 
-url = 'http://127.0.0.1:5000/try'
-
+#opening list of IP's
 with open('ipList.txt', 'r') as f:
     ipList = [line.strip() for line in f]
-    f.close() 
+    f.close()
+#checking if IP List is compatible with version
+if len(ipList) > 10:
+    print("Your IP List is longer than 10 entires, which is more than alloted for your version. Sending it would result in an error from the server.")
+    print("Please shorten your list so that all your IP's may be processed.")
+    time.sleep(5)
+    exit()
 
+#Recursively sending requests to the server
 for ip in ipList:
     ipsearch = "{\n\t\"ip\":\""+ip+"\"\n}"
     authentication = {'Content-Type': "application/json"}
@@ -48,7 +57,7 @@ for ip in ipList:
             ipAddress = [""+ip+""]
             df = pd.Series(data).to_frame().T
             df['ip'] = ipAddress
-
+            #processing and removing unnecessary fields from the result
             if set(['city_names_en','subdivisions_0_names_en']).issubset(df.columns):
                 df = df[['ip','city_names_en','subdivisions_0_names_en','country_names_en','continent_names_en','location_latitude','location_longitude',
                 'autonomous_system_number','autonomous_system_organization','isp','organization','organization_type','isic_code','naics_code','connection_type'
