@@ -6,6 +6,8 @@ The IPGeo repository on GitHub is an pre-coded example of the usage of our [IPGe
 
 Feel Free to check out the [IPGeoSearch](https://github.com/MatthiasRathbun/IPGeo-Search) library on GitHub for more information and ways to use our API!
 
+We offer a 5 day free trial for our API on [Our Webpage](http://ipgeo.azurewebsites.net/). To get the free trial API Key, contact our Lab and we will send it.
+
 ## Requirements
 
 Before running on your local computer, make sure you have `python 3.6+` with the latest version of `pandas` and `IPGeoSearch` installed, your API Key, and `ipList.txt` in the same folder as the python file.
